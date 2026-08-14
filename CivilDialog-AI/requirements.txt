@@ -1,0 +1,6 @@
+numpy>=2.1.0
+spacy==3.8.15
+nltk==3.10.3
+pytest
+transformers
+torch
