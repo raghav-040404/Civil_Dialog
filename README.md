@@ -1,4 +1,8 @@
-# CivilDialog
+# Civil_Dialog
+
+Mini Project
+
+Deadline: 5-09-2026
 
 AI-powered real-time moderation platform that detects toxic language, hate speech, logical fallacies, and negative sentiment while users type.
 
