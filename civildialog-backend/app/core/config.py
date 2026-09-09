@@ -10,6 +10,8 @@ class Settings(BaseSettings):
 
     llm_service_url: str = "http://127.0.0.1:8001"
 
+    database_url: str
+
     model_config = SettingsConfigDict(
         env_file=".env",
         env_file_encoding="utf-8"

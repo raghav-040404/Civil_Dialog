@@ -7,6 +7,9 @@ from app.utils.exceptions import AppException
 from app.api.auth import router as auth_router
 from app.api.users import router as users_router
 from app.api.admin import router as admin_router
+from app.api.analytics import router as analytics_router
+from app.api.history import router as history_router
+from app.api.messages import router as messages_router
 
 app = FastAPI(
     title="CivilDialog API",
@@ -85,4 +88,22 @@ app.include_router(
     moderation_router,
     prefix="/api/v1/moderation",
     tags=["Moderation"]
+)
+
+app.include_router(
+    analytics_router,
+    prefix="/api/v1/analytics",
+    tags=["Analytics"]
+)
+
+app.include_router(
+    history_router,
+    prefix="/api/v1/history",
+    tags=["History"]
+)
+
+app.include_router(
+    messages_router,
+    prefix="/api/v1/messages",
+    tags=["Messages"]
 )

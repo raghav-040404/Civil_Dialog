@@ -8,6 +8,14 @@ class ModerationRequest(BaseModel):
         max_length=5000
     )
 
+    # Optional: attach this message to an existing conversation the
+    # authenticated user owns. Omitted -> a new conversation is started
+    # and its id is returned in ModerationResult.conversation_id for the
+    # client to reuse on the next message.
+    conversation_id: int | None = Field(
+        default=None
+    )
+
 
 class TokenInfo(BaseModel):
     text: str
@@ -67,6 +75,12 @@ class ModerationResult(BaseModel):
     llm_analysis: LLMAnalysis
 
     civility_score: int
+
+    # Added for persistence (Phase C): identifies the stored rows so a
+    # client can continue this conversation or reference this message
+    # later (e.g. to accept a rewrite). All fields above are unchanged.
+    conversation_id: int
+    message_id: int
 
 
 class ModerationResponse(BaseModel):
