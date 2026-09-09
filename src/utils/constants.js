@@ -1,5 +1,5 @@
-export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-export const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true' || import.meta.env.DEV;
+export const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://civil-dialog-backend.onrender.com';
+export const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true' || (!import.meta.env.VITE_API_URL && import.meta.env.PROD);
 
 export const TOKEN_KEY = 'civil_dialog_token';
 export const REFRESH_TOKEN_KEY = 'civil_dialog_refresh_token';
