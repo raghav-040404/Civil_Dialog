@@ -1,0 +1,40 @@
+# CivilDialog — PostgreSQL only.
+#
+# The FastAPI backend, the AI/NLP module and the LLM service are intentionally
+# NOT containerised: they load multi-gigabyte Hugging Face models and rely on a
+# cross-project sys.path (see app/services/nlp_service.py). They stay local.
+#
+# Usage:
+#     docker compose up -d          # start PostgreSQL
+#     docker compose ps             # check health
+#     docker compose logs -f db     # tail logs
+#     docker compose down           # stop (data is kept in the named volume)
+#     docker compose down -v        # stop AND destroy all data
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: civildialog-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: civildialog
+      POSTGRES_USER: civildialog
+      POSTGRES_PASSWORD: civildialog
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - civildialog_pgdata:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U civildialog -d civildialog"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  civildialog_pgdata:
+    name: civildialog_pgdata
